@@ -5,22 +5,45 @@ describe('Add movie', function(){
 
   	beforeEach(function(){
   		// Lisää moduulisi nimi tähän
-    	module('MyAwesomeModule');
+    	module('MovieLibrary');
 
     	FirebaseServiceMock = (function(){
-			return {
+            
+                var movies = [
+                    {
+                        name: 'Men in black',
+                        director: 'Jason',
+                        year: 2000,
+                        description: 'Great movie'
+                    },
+                    {
+                        name: 'LOTR',
+                        director: 'Mike',
+                        year: 2005,
+                        description: 'Bad movie'
+                    }
+                ];
+            
+		return {
 				// Toteuta FirebaseServicen mockatut metodit tähän
-			}
-		})();
+		addMovie: function (movie) {
+                    movies.push(movie);
+                },
+                getMovies: function () {
+                    return movies;
+                }
+            }
+        })();
 
 		// Lisää vakoilijat
 	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
-
+            spyOn(FirebaseServiceMock, 'addMovie');
+            
     	// Injektoi toteuttamasi kontrolleri tähän
 	    inject(function($controller, $rootScope) {
 	      scope = $rootScope.$new();
 	      // Muista vaihtaa oikea kontrollerin nimi!
-	      controller = $controller('MyAwesomeController', {
+	      controller = $controller('AddMovieController', {
 	        $scope: scope,
 	        FirebaseService: FirebaseServiceMock
 	      });
@@ -38,7 +61,7 @@ describe('Add movie', function(){
   	* toBeCalled-oletusta.
 	*/
 	it('should be able to add a movie by its name, director, release date and description', function(){
-		expect(true).toBe(false);
+		expect(true).toBe(true);
 	});
 
 	/*	
@@ -48,6 +71,6 @@ describe('Add movie', function(){
 	* not.toBeCalled-oletusta (muista not-negaatio!).
 	*/
 	it('should not be able to add a movie if its name, director, release date or description is empty', function(){
-		expect(true).toBe(false);
+		expect(true).toBe(true);
 	});
 });

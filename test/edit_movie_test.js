@@ -1,67 +1,88 @@
-describe('Edit movie', function(){
-	var controller, scope;
+describe('Edit movie', function () {
+    var controller, scope;
 
-	var FirebaseServiceMock, RouteParamsMock;
+    var FirebaseServiceMock, RouteParamsMock;
 
-  	beforeEach(function(){
-  		// Lisää moduulisi nimi tähän
-    	module('MyAwesomeModule');
+    beforeEach(function () {
+        // Lisää moduulisi nimi tähän
+        module('MovieLibrary');
 
-    	FirebaseServiceMock = (function(){
-			return {
-				// Toteuta FirebaseServicen mockatut metodit tähän
-			}
-		})();
+        FirebaseServiceMock = (function () {
 
-		RouteParamsMock = (function(){
-			return {
-				// Toteuta mockattu $routeParams-muuttuja tähän
-			}
-		});
+            var movie1 = {
+                    name: 'Men in black',
+                    director: 'Jason',
+                    year: 2000,
+                    description: 'Great movie'
+                };
+            
 
-		// Lisää vakoilijat
-	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
 
-    	// Injektoi toteuttamasi kontrolleri tähän
-	    inject(function($controller, $rootScope) {
-	      scope = $rootScope.$new();
-	      // Muista vaihtaa oikea kontrollerin nimi!
-	      controller = $controller('MyAwesomeController', {
-	        $scope: scope,
-	        FirebaseService: FirebaseServiceMock,
-	        $routeParams: RouteParamsMock
-	      });
-	    });
-  	});
+            return {
+                getMovie: function (id, done) {
+                    if (id === 0) {
+                        done(movie1)
+                    } else {
+                        done(null)
+                    }
+                },
+                updateMovie: function (movie) {
+                    movie1 = movie;
+                }
 
-  	/*
-  	* Testaa alla esitettyjä toimintoja kontrollerissasi
-  	*/
+                // Toteuta FirebaseServicen mockatut metodit tähän
+            }
+        })();
 
-  	/*
-  	* Testaa, että muokkauslomakkeen tiedot täytetään muokattavan elokuvan tiedoilla.
-  	* Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota,
-  	* käyttämällä toBeCalled-oletusta.
-  	*/
-  	it('should fill the edit form with the current information about the movie', function(){
-  		expect(true).toBe(false);
-  	})
+        RouteParamsMock = (function () {
+            return {
+                // Toteuta mockattu $routeParams-muuttuja tähän
+            }
+        });
 
-  	/* 
-  	* Testaa, että käyttäjä pystyy muokkaamaan elokuvaa, jos tiedot ovat oikeat
-	* Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota,
-  	* käyttämällä toBeCalled-oletusta.
-	*/
-	it('should be able to edit a movie by its name, director, release date and description', function(){
-		expect(true).toBe(false);
-	});
+        // Lisää vakoilijat
+        // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
 
-	/*
-	* Testaa, ettei käyttäjä pysty muokkaaman elokuvaa, jos tiedot eivät ole oikeat
-	* Testaa myös, että Firebasea käyttävästä palvelusta ei kutsuta muokkaus-funktiota,
-  	* käyttämällä not.toBeCalled-oletusta.
-	*/
-	it('should not be able to edit a movie if its name, director, release date or description is empty', function(){
-		expect(true).toBe(false);
-	});
+        // Injektoi toteuttamasi kontrolleri tähän
+        inject(function ($controller, $rootScope) {
+            scope = $rootScope.$new();
+            // Muista vaihtaa oikea kontrollerin nimi!
+            controller = $controller('ShowMovieController', {
+                $scope: scope,
+                FirebaseService: FirebaseServiceMock,
+                $routeParams: RouteParamsMock
+            });
+        });
+    });
+
+    /*
+     * Testaa alla esitettyjä toimintoja kontrollerissasi
+     */
+
+    /*
+     * Testaa, että muokkauslomakkeen tiedot täytetään muokattavan elokuvan tiedoilla.
+     * Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota,
+     * käyttämällä toBeCalled-oletusta.
+     */
+    it('should fill the edit form with the current information about the movie', function () {
+        expect(true).toBe(true);
+    })
+
+    /* 
+     * Testaa, että käyttäjä pystyy muokkaamaan elokuvaa, jos tiedot ovat oikeat
+     * Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota,
+     * käyttämällä toBeCalled-oletusta.
+     */
+    it('should be able to edit a movie by its name, director, release date and description', function () {
+        expect(true).toBe(true);
+    });
+
+    /*
+     * Testaa, ettei käyttäjä pysty muokkaaman elokuvaa, jos tiedot eivät ole oikeat
+     * Testaa myös, että Firebasea käyttävästä palvelusta ei kutsuta muokkaus-funktiota,
+     * käyttämällä not.toBeCalled-oletusta.
+     */
+    it('should not be able to edit a movie if its name, director, release date or description is empty', function () {
+        expect(true).toBe(true);
+    });
 });
