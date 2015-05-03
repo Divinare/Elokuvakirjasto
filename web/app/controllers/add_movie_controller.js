@@ -1,5 +1,7 @@
-MovieLibrary.controller('AddMovieController', function ($scope, FirebaseService) {
-
+MovieLibrary.controller('AddMovieController', function ($scope, currentAuth, $location, FirebaseService) {
+    if (!currentAuth) {
+        $location.path('/login');
+    }
 
     $scope.addMovie = function () {
 
