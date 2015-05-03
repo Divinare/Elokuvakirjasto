@@ -4,7 +4,6 @@ describe('Show movie', function () {
     var FirebaseServiceMock, RouteParamsMock;
 
     beforeEach(function () {
-        // Lisää moduulisi nimi tähän
         module('MovieLibrary');
 
         FirebaseServiceMock = (function () {
@@ -18,9 +17,9 @@ describe('Show movie', function () {
             return {
                 getMovie: function (id, done) {
                     if (id === 0) {
-                        done(movie1)
+                        done(movie1);
                     } else {
-                        done(null)
+                        done(null);
                     }
                 }
             }
@@ -28,35 +27,27 @@ describe('Show movie', function () {
 
         RouteParamsMock = (function () {
             return {
-                // Toteuta mockattu $routeParams-muuttuja tähän
+                id: 0
             }
-        });
+        })();
 
-        // Lisää vakoilijat
-        // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough();
+        spyOn(FirebaseServiceMock, 'getMovie').and.callThrough();
 
-        // Injektoi toteuttamasi kontrolleri tähän
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
-            // Muista vaihtaa oikea kontrollerin nimi!
             controller = $controller('ShowMovieController', {
                 $scope: scope,
                 FirebaseService: FirebaseServiceMock,
-                $routePrams: RouteParamsMock
+                $routeParams: RouteParamsMock
             });
         });
     });
 
-    /*
-     * Testaa alla esitettyjä toimintoja kontrollerissasi
-     */
-
-    /* 
-     * Testaa, että Firebasesta (mockilta) saatu elokuva löytyy kontrollerista.
-     * Testaa myös, että Firebasea käyttävästä palvelusta kutsutaan oikeaa funktiota
-     * käyttämällä toBeCalled-oletusta.
-     */
     it('should show current movie from Firebase', function () {
-        expect(true).toBe(true);
+        expect(FirebaseServiceMock.getMovie).toHaveBeenCalled();
+        expect(scope.movie.name).toBe("Men in black");
+        expect(scope.movie.director).toBe("Jason");
+        expect(scope.movie.year).toBe(2000);
+        expect(scope.movie.description).toBe("Great movie");
     });
 });
