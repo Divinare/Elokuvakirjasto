@@ -1,36 +1,36 @@
-<div>
+<div class="movie-form">
     <h1>Edit movie {{movie.name}}</h1>
     <form name="form">
-        <p>
+        <div class="form-group">
         <label>Name </label>
-        <input type="text" ng-model="movie.name" name='movieName' required ng-minlength="3">
+        <input class="form-control" type="text" ng-model="movie.name" name='movieName' required ng-minlength="3">
         <span ng-show="form.name.$invalid && form.name.$dirty">
            Username length needs to be more than 2.
         </span>
-        </p>
-        <p>
+        </div>
+        <div class="form-group">
         <label>Director </label>
-        <input type="text" ng-model="movie.director" name='movieDirector' required ng-minlength="3">
+        <input class="form-control" type="text" ng-model="movie.director" name='movieDirector' required ng-minlength="3">
         <span ng-show="form.director.$invalid && form.director.$dirty">
            Director length needs to be more than 2.
         </span>
-        </p>
+        </div>
 
-        <p>
+        <div class="form-group">
         <label>Year </label>
-        <input type="number" ng-model="movie.year" name='movieYear' min="1950" max="2020" integer>
+        <input class="form-control" type="number" ng-model="movie.year" name='movieYear' min="1950" max="2020" integer>
           <span ng-show="form.year.$error.integer">The value is not a valid integer!</span>
           <span ng-show="form.year.$error.min || form.year.$error.max">
             The value must be in range 1950 to 2020.</span>
-        </p>
+        </div>
 
-        <p>
+        <div class="form-group">
         <label>Description </label>
-        <input type="text" ng-model="movie.description" name='movieDescription' required ng-minlength="3">
+        <input class="form-control" type="text" ng-model="movie.description" name='movieDescription' required ng-minlength="3">
         <span ng-show="form.description.$invalid && form.description.$dirty">
            Director length needs to be more than 2.
         </span>
-        </p>
+        </div>
 
         <button class="btn btn-default" type="submit"ng-click="editMovie(movie)" ng-disabled="form.$invalid">Edit movie</button>
     </form>

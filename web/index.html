@@ -27,17 +27,17 @@
                         <li><a href="#/movies/new">New movie</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" ng-controller="UserController">
-                        <li ng-show="!userLoggedIn">
+                        <li ng-if="!userLoggedIn()">
                             <form action="#/login" class="navbar-form">
                                 <button  class="btn btn-default" type="submit">Log In</button>
                             </form>
                         </li>
-                        <li ng-show="!userLoggedIn">
+                        <li ng-if="!userLoggedIn()">
                             <form action="#/register" class="navbar-form">
                                 <button  class="btn btn-default" type="submit">Register</button>
                             </form>
                         </li>
-                        <li ng-show="userLoggedIn">
+                        <li ng-if="userLoggedIn()">
                             <form action="#/" class="navbar-form">
                                 <button  ng-click="logOut()" class="btn btn-default" type="submit">Log Out</button>
                             </form>

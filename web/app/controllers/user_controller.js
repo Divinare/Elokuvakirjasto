@@ -1,14 +1,8 @@
 MovieLibrary.controller('UserController', function ($scope, $location, AuthenticationService) {
-
-    $scope.message = ""
-    AuthenticationService.checkLoggedIn().then(function (value) {
-        $scope.userLoggedIn = value
-    })
-    $scope.$on('loginChange', function (event, data) {
-        AuthenticationService.checkLoggedIn().then(function (value) {
-            $scope.userLoggedIn = value
-        })
-    })
+ 
+    if (AuthenticationService.getUserLoggedIn()) {
+      $location.path('/movies');
+  }
 
     $scope.logIn = function () {
         AuthenticationService.logUserIn($scope.email, $scope.password)

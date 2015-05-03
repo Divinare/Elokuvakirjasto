@@ -14,3 +14,7 @@ body {
 .content {
     margin: 20px;
 }
+
+.movie-form {
+    width: 80%
+}

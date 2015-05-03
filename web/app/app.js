@@ -70,16 +70,16 @@ MovieLibrary.config(function ($routeProvider) {
 });
 
 
-MovieLibrary.run(function (AuthenticationService, $rootScope) {
+MovieLibrary.run(function (AuthenticationService, $location, $rootScope) {
     $rootScope.logOut = function () {
         AuthenticationService.logUserOut();
         $location.path('/login');
     };
     
     $rootScope.userLoggedIn = function () {
-        $rootScope.userLoggedIn = AuthenticationService.getUserLoggedIn();
-        return $rootScope.userLoggedIn;
-    };
+        $rootScope.user = AuthenticationService.getUserLoggedIn();
+        return $rootScope.user;
+   };
 });
 
 
